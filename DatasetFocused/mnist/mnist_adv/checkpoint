@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/viraat-chandra/Workspace/Machine_Learning/Tensorflow_VENV/Projects/others/MNIST_Testing/20_trained_model.tflearn"
+all_model_checkpoint_paths: "/home/viraat-chandra/Workspace/Machine_Learning/Tensorflow_VENV/Projects/others/MNIST_Testing/20_trained_model.tflearn"
