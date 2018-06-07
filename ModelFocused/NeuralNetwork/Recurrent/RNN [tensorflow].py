@@ -18,8 +18,8 @@ def generateData():
     y[0:echo_step] = 0
 
     # one series per batch
-    x = x.reshape((batch_size, -1))
-    y = y.reshape((batch_size, -1))
+    x = x.reshape([batch_size, -1])
+    y = y.reshape([batch_size, -1])
 
     return [x, y]
 
@@ -120,4 +120,3 @@ plt.ioff()
 plt.show()
 
 # no need for testing data, the model will be optimial in approximating the desired function (random in this case)
-# try out this program with another weight matrix U for the hidden state and concatenate after broadcast addition
