@@ -120,3 +120,4 @@ plt.ioff()
 plt.show()
 
 # no need for testing data, the model will be optimial in approximating the desired function (random in this case)
+# try out expanding the batch size
