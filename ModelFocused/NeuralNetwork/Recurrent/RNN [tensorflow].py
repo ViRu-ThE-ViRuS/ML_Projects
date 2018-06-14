@@ -3,6 +3,7 @@ import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
 
+
 num_epochs = 100
 total_series_length = 50000
 truncated_backprop_length = 15
