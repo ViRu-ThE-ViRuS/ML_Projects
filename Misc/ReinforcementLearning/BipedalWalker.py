@@ -10,7 +10,6 @@ import gym
 
 
 class Model(object):
-
     def __init__(self):
         self.weights = [np.zeros(shape=(24, 16)), np.zeros(
             shape=(16, 16)), np.zeros(shape=(16, 4))]
@@ -103,9 +102,9 @@ class Agent:
 
 if __name__ == '__main__':
     agent = Agent()
-    # agent.load()
-    agent.train(100)  # train for 100 iterations
-    agent.save()
+    agent.load()
+    # agent.train(100)  # train for 100 iterations
+    # agent.save()
 
     # play one episode
     agent.play(1)
