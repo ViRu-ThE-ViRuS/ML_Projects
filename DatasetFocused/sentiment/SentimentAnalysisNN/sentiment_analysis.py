@@ -1,8 +1,6 @@
-from create_sentiment_featuresets import create_feature_sets_and_labels
-import os
-import tensorflow as tf
-import pickle
 import numpy as np
+import tensorflow as tf
+from create_sentiment_featuresets import create_feature_sets_and_labels
 
 train_x, train_y, test_x, test_y = create_feature_sets_and_labels('pos.txt', 'neg.txt')
 
@@ -71,7 +69,7 @@ def train_neural_network(x):
                 epoch_loss += c
                 i += batch_size
 
-            print('Epoch {} completed out of {} with loss: {}'.format(epoch+1, hm_epochs, epoch_loss))
+            print('Epoch {} completed out of {} with loss: {}'.format(epoch + 1, hm_epochs, epoch_loss))
 
         correct = tf.equal(tf.argmax(prediction, 1), tf.argmax(y, 1))
         accuracy = tf.reduce_mean(tf.cast(correct, 'float'))

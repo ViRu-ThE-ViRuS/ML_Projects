@@ -1,8 +1,7 @@
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
-
 
 mnist = input_data.read_data_sets('../Data/tmp/mnist/', one_hot=True)
 
@@ -77,11 +76,11 @@ with tf.Session() as sess:
 
         for j in range(n):
             canvasOrig[i * 28:(i + 1) * 28, j * 28:(j + 1)
-                       * 28] = batchX[j].reshape([28, 28])
+                                                   * 28] = batchX[j].reshape([28, 28])
 
         for j in range(n):
             canvasRecon[i * 28:(i + 1) * 28, j * 28:(j + 1)
-                        * 28] = g[j].reshape([28, 28])
+                                                    * 28] = g[j].reshape([28, 28])
 
     print("Original Images")
     plt.figure(figsize=(n, n))

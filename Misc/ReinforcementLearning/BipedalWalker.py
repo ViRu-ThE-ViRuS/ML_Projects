@@ -1,47 +1,27 @@
-import random
 import _pickle as pickle
-import numpy as np
-from evostra import EvolutionStrategy
+import random
+
 import gym
-
-
-# uses custom optimized version of evostra library
-# original link: https://github.com/alirezamika/evostra
-
-
-class Model(object):
-    def __init__(self):
-        self.weights = [np.zeros(shape=(24, 16)), np.zeros(
-            shape=(16, 16)), np.zeros(shape=(16, 4))]
-
-    def predict(self, inp):
-        out = np.expand_dims(inp.flatten(), 0)
-        out = out / np.linalg.norm(out)
-        for layer in self.weights:
-            out = np.dot(out, layer)
-        return out[0]
-
-    def get_weights(self):
-        return self.weights
-
-    def set_weights(self, weights):
-        self.weights = weights
+import numpy as np
+from Model import Model
+from evostra import EvolutionStrategy
 
 
 class Agent:
     AGENT_HISTORY_LENGTH = 1
-    POPULATION_SIZE = 20
+    POPULATION_SIZE = 25
     EPS_AVG = 1
-    SIGMA = 0.1
-    LEARNING_RATE = 0.01
+    SIGMA = 0.5
+    LEARNING_RATE = 0.1
     INITIAL_EXPLORATION = 1.0
     FINAL_EXPLORATION = 0.0
-    EXPLORATION_DEC_STEPS = 1000000
+    EXPLORATION_DEC_STEPS = 100000
 
     def __init__(self):
         self.env = gym.make('BipedalWalker-v2')
         self.model = Model()
-        self.es = EvolutionStrategy(self.model.get_weights(), self.get_reward, self.POPULATION_SIZE, self.SIGMA, self.LEARNING_RATE)
+        self.es = EvolutionStrategy(self.model.get_weights(), self.get_reward, self.POPULATION_SIZE, self.SIGMA,
+                                    self.LEARNING_RATE)
         self.exploration = self.INITIAL_EXPLORATION
 
     def get_predicted_action(self, sequence):
@@ -86,8 +66,8 @@ class Agent:
             sequence = [observation] * self.AGENT_HISTORY_LENGTH
             done = False
             while not done:
-                self.exploration = max(self.FINAL_EXPLORATION, self.exploration -
-                                       self.INITIAL_EXPLORATION / self.EXPLORATION_DEC_STEPS)
+                self.exploration = max(self.FINAL_EXPLORATION,
+                                       self.exploration - self.INITIAL_EXPLORATION / self.EXPLORATION_DEC_STEPS)
                 if random.random() < self.exploration:
                     action = self.env.action_space.sample()
                 else:
@@ -98,13 +78,3 @@ class Agent:
                 sequence.append(observation)
 
         return total_reward / self.EPS_AVG
-
-
-if __name__ == '__main__':
-    agent = Agent()
-    agent.load()
-    # agent.train(100)  # train for 100 iterations
-    # agent.save()
-
-    # play one episode
-    agent.play(1)

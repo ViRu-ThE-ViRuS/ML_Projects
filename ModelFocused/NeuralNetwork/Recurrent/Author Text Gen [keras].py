@@ -1,15 +1,16 @@
 from __future__ import print_function
-from keras.callbacks import LambdaCallback
-from keras.models import Sequential
-from keras.layers import Dense, Activation
-from keras.layers import LSTM
-from keras.optimizers import RMSprop
-from keras.utils.data_utils import get_file
-import numpy as np
+
+import io
 import random
 import sys
-import io
 
+import numpy as np
+from keras.callbacks import LambdaCallback
+from keras.layers import Dense, Activation
+from keras.layers import LSTM
+from keras.models import Sequential
+from keras.optimizers import RMSprop
+from keras.utils.data_utils import get_file
 
 path = get_file('nietzsche.txt', origin='https://s3.amazonaws.com/text-datasets/nietzsche.txt')
 text = io.open(path, encoding='utf-8').read().lower()
@@ -36,7 +37,6 @@ for i, sentence in enumerate(sentences):
     for t, char in enumerate(sentence):
         x[i, t, char_indices[char]] = 1
     y[i, char_indices[next_chars[i]]] = 1
-
 
 print('Build model...')
 model = Sequential()
@@ -86,6 +86,7 @@ def on_epoch_end(epoch, logs):
             sys.stdout.write(next_char)
             sys.stdout.flush()
         print()
+
 
 print_callback = LambdaCallback(on_epoch_end=on_epoch_end)
 

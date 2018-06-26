@@ -1,8 +1,9 @@
 from __future__ import print_function
 
-import tensorflow as tf
-import numpy
 import matplotlib.pyplot as plt
+import numpy
+import tensorflow as tf
+
 rng = numpy.random
 
 # Parameters
@@ -39,7 +40,6 @@ init = tf.global_variables_initializer()
 
 # Start training
 with tf.Session() as sess:
-
     # Run the initializer
     sess.run(init)
 

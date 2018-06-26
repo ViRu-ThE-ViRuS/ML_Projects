@@ -1,11 +1,12 @@
-import tensorflow as tf
-import numpy as np
-
 # ---------------------
 import gzip
 import os
-from six.moves.urllib.request import urlretrieve
+
 import numpy
+import numpy as np
+import tensorflow as tf
+from six.moves.urllib.request import urlretrieve
+
 SOURCE_URL = 'http://yann.lecun.com/exdb/mnist/'
 
 
@@ -72,8 +73,8 @@ class DataSet(object):
             self._num_examples = 10000
         else:
             assert images.shape[0] == labels.shape[0], (
-                "images.shape: %s labels.shape: %s" % (images.shape,
-                                                       labels.shape))
+                    "images.shape: %s labels.shape: %s" % (images.shape,
+                                                           labels.shape))
             self._num_examples = images.shape[0]
             assert images.shape[3] == 1
             images = images.reshape(images.shape[0],
@@ -125,6 +126,7 @@ class DataSet(object):
 def read_data_sets(train_dir, fake_data=False, one_hot=False):
     class DataSets(object):
         pass
+
     data_sets = DataSets()
     if fake_data:
         data_sets.train = DataSet([], [], fake_data=True)
@@ -152,6 +154,8 @@ def read_data_sets(train_dir, fake_data=False, one_hot=False):
     data_sets.validation = DataSet(validation_images, validation_labels)
     data_sets.test = DataSet(test_images, test_labels)
     return data_sets
+
+
 # ---------------------
 
 mnist_width = 28
@@ -174,10 +178,11 @@ b_prime = tf.Variable(tf.zeros([n_visible]), name='b_prime')
 
 
 def model(X, mask, W, b, W_prime, b_prime):
-    tilde_X = mask * X 
+    tilde_X = mask * X
     Y = tf.nn.sigmoid(tf.matmul(tilde_X, W) + b)
     Z = tf.nn.sigmoid(tf.matmul(Y, W_prime) + b_prime)
     return Z
+
 
 Z = model(X, mask, W, b, W_prime, b_prime)
 
