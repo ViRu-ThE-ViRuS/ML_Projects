@@ -104,8 +104,8 @@ class Agent:
 if __name__ == '__main__':
     agent = Agent()
     # agent.load()
-    # agent.save()
     agent.train(100)  # train for 100 iterations
+    agent.save()
 
     # play one episode
     agent.play(1)
