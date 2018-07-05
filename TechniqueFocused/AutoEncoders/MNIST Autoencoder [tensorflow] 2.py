@@ -5,7 +5,7 @@ from tensorflow.examples.tutorials.mnist import input_data
 
 mnist = input_data.read_data_sets('../Data/tmp/mnist/', one_hot=True)
 
-LR = 0.01
+LR = 0.05
 numSteps = 30000
 batchSize = 256
 displaySteps = 1000
