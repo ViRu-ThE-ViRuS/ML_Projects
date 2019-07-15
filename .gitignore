@@ -2,6 +2,7 @@ MNIST_data
 train
 test
 *.npy
+*.csv
 
 # Created by https://www.gitignore.io/api/vim,python,jupyternotebook
 
